@@ -1,0 +1,10 @@
+   44  p val_b
+   45  p head
+   46  p *head
+   47  p reader->token
+   48  p head
+   49  q
+   50  q
+   51  show history
+   52  q
+   53  show commands

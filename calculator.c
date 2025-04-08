@@ -8,7 +8,7 @@ int calculate_result(struct Reader *reader) {
     while (reader->token != NULL) {
         reader->token->next = head;
         head = reader->token;
-        if (head->tok_type != TOK_NUM) {
+        if (head && head->next && head->next->next && head->tok_type != TOK_NUM) {
             // this is an operation:
             struct Token *op = head;
             struct Token *val_a = head->next;
@@ -16,6 +16,10 @@ int calculate_result(struct Reader *reader) {
 
             struct Token *new_token = malloc(sizeof(struct Token));
             if (!new_token) {
+                reader->had_error = true;
+                return -1;
+            }
+            if (!val_a || !val_b) {
                 reader->had_error = true;
                 return -1;
             }
